@@ -64,7 +64,15 @@ let myNewReadyFiles = null;
   }
 
 
+  function resetTable($table = $('table')){
+    $table.find($('#thnewname')).hide();
+    // $('.tdnewname').remove();
+    console.log( $table.find($('tbody tr')));
+    $('table').find($('tbody tr')).remove();
+  }
+
   function traiterFiles(files){
+    resetTable();
     showFiles(files);
     let myNames = [];
     console.log("tab de base : ");
@@ -79,12 +87,16 @@ let myNewReadyFiles = null;
     console.log(beautifiedNames);
 
     //display new names
-    $('th:first').after('<th>Nouveau nom</th>');
-    $firstCellsOfEachRow = $('td:first-child');
+    $('#thnewname').show();
+
+
+    $firstCellsOfEachRowAvailable = $('td:first-child');
+
+
     for (var i = 0; i < beautifiedNames.length; i++) {
 
-      let cellHTML = '<td>'+getWithoutExt(beautifiedNames[i])+'</td>';
-      $($firstCellsOfEachRow[i]).after(cellHTML);
+      let cellHTML = '<td class="tdnewname">'+getWithoutExt(beautifiedNames[i])+'</td>';
+      $($firstCellsOfEachRowAvailable[i]).after(cellHTML);
     }
 
     // //update files with new names

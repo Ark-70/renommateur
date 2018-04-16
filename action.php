@@ -16,4 +16,5 @@ header("Content-type: application/zip");
 header("Content-Disposition: attachment; filename=".$zipArchive);
 readfile($zipArchive);
 
+unlink($zipArchive);
 // ici clean le dossier susdit
