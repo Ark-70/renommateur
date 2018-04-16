@@ -1,9 +1,8 @@
 <?php
 /* creates a compressed zip file */
-function create_zip($filesLocations = array(), $filesNames, $destination = '',$overwrite = true) {
+function create_zip($filesLocations = array(), $filesNames, $destination = '', $overwrite = true) {
 	//if the zip file already exists and overwrite is false, return false
 	if(file_exists($destination) && !$overwrite) {
-    // var_dump("AAAAAAAAAAAAAAAAAAAAH");
     return false;
   }
 	//vars
@@ -22,9 +21,16 @@ function create_zip($filesLocations = array(), $filesNames, $destination = '',$o
 	if(count($valid_files)) {
 		//create the archive
 		$zip = new ZipArchive();
-		if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
+
+    // $zip->open($destination, $overwrite? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE);
+    // var_dump($zip->status);
+    $couille = $zip->open($destination, ZipArchive::OVERWRITE);
+    if($couille !== true) {
+		// if($zip->open($destination, $overwrite? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
 			return false;
 		}
+
+
 		//add the files
     for ($i=0; $i < count($valid_files); $i++) {
       $zip->addFile($valid_files[$i], $filesNames[$i]);
@@ -41,7 +47,6 @@ function create_zip($filesLocations = array(), $filesNames, $destination = '',$o
     }else{
       return false;
     }
-		// return file_exists($destination);
 	}
 	else
 	{
