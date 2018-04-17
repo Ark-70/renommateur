@@ -30,7 +30,10 @@
 <body>
   <h1>Renommer tout sous la forme NOM Prénom domaine.pdf</h1>
   <button id="tester">Tester avec des données préremplies</button>
-  <p><label for="">Supprimer des "mots" particuliers <small>(non sensibles à la casse et à séparer par des ", ")</small> : </label><input id="forbidden" type="text" value="cv, "></p>
+  <p>
+    <label for="">Supprimer des groupes de mots particuliers <small>(non sensibles à la casse et à séparer par des ", ")</small> : </label>
+    <input id="forbidden" type="text" value="cv, lettre de motivation, " size="45">
+  </p>
   <p><label for="">Ajouter un préfixe <small>(par défaut aucun)</small> : </label><input id="prefix" type="text" placeholder='Exemple : TSI'></p>
   <p><label for="">Ajouter un suffixe <small>(par défaut aucun)</small> : </label><input id="suffix" type="text" placeholder='Exemple : 2018'></p>
   <p><label for="">Séparateur particulier <small>(par défaut un espace)</small> : </label><input id="separator" type="text" placeholder='Exemple : ", "'></p>

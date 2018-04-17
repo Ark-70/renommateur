@@ -1,10 +1,8 @@
 class FichierCustom {
+
   constructor(fileObj) {
     // variables partagées entre toutes les instances de la classes, qui ne changeront pas
     // Pas sûr que le static variable soit pris en compte en ES6
-    // static prefix = undefined;
-    // static suffix = undefined;
-    // static forbiddenWords = [];
 
 
     this.originalName = fileObj.name;
@@ -25,6 +23,7 @@ class FichierCustom {
     }else{
       mySize+=" octets"
     }
+    console.log("bettersize ",mySize);
     this.betterSize = mySize;
     return this.betterSize;
   }
@@ -41,38 +40,43 @@ class FichierCustom {
     let ext = str.split(".");
     ext = strNoExt.slice();
     ext.splice(ext.length-2,ext.length-1);
-    this.ext = "."+ext;
-    return this.ext;
+    ext = "."+ext;
+    this.ext = ext;
+    return ext;
   }
 
   generateNewName(){
-    this.newName = this.beautifyName(this.normalizeNameToArr(this.originalName));
+    this.newName = this.beautifyName(this.normalizeNameToArr(this.getWithoutExt(this.originalName)));
     return this.newName;
   }
 
   normalizeNameToArr(fileName){
-    fileName.split()
-    let arrName = fileName.split(/[\s,\-_]+/);
-    console.log(arrName);
-    for (var i = 0; i < arrName.length; i++) {
-      arrName[i] = arrName[i].toLowerCase();
+    fileName = fileName.toLowerCase();
+    console.log(FichierCustom.forbiddenWords);
+    for (let word of FichierCustom.forbiddenWords) {
+      let indexWord = fileName.search(word);
+      if (indexWord!=-1) {
+        fileName = fileName.slice(0,indexWord)+fileName.slice(indexWord+word.length);
+      }
     }
+
+    let arrName = fileName.trim().split(/[\s,\-_.]+/);
+    console.log(arrName);
 
     return arrName;
   }
 
   beautifyName(arrName){
-    let tmpI = arrName.indexOf("cv");
-    if(tmpI!=-1) arrName.splice(tmpI, 1);
+    // let tmpI = arrName.indexOf("cv");
+    // if(tmpI!=-1) arrName.splice(tmpI, 1);
     // Enlever des mots
 
     // Mettre le premier mot (supposé NOM) en maj
     arrName[0] = arrName[0].toUpperCase();
-    console.log(arrName);
+    // console.log(arrName);
     if (arrName.length>=2) {
       // arrName[1][0] = arrName[1][0].toUpperCase(); //marche pas ???
       arrName[1] = arrName[1][0].toUpperCase()+arrName[1].slice(1, arrName[1].length);
-      console.log(arrName[1][0]);
     }
     let beautifiedName = arrName.join(' ');
     return beautifiedName;

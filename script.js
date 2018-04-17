@@ -20,25 +20,31 @@ let mesFichiersCustom = [];
         type:"application/pdf",
         lastModified: 1521831949827
       }
-      // ,
-      // {
-      //   name:"traparic david.pdf",
-      //   size:1452,
-      //   type:"application/pdf",
-      //   lastModified: 1521788145876
-      // },
-      // {
-      //   name:"david traparic cv.pdf",
-      //   size:45651213,
-      //   type:"application/pdf",
-      //   lastModified: 1521773778421
-      // },
-      // {
-      //   name:"CV TRAPARIC David.pdf",
-      //   size:145,
-      //   type:"application/pdf",
-      //   lastModified: 1521909934578
-      // }
+      ,
+      {
+        name:"TRAPARIC DAVID.pdf",
+        size:1452,
+        type:"application/pdf",
+        lastModified: 1521788145876
+      },
+      {
+        name:"david.traparic.cv.pdf",
+        size:45651213,
+        type:"application/pdf",
+        lastModified: 1521773778421
+      },
+      {
+        name:"CV TRAPARIC David.pdf",
+        size:145,
+        type:"application/pdf",
+        lastModified: 1521909934578
+      },
+      {
+        name:"CV Lettre de motivation - TRAPARIC David - Domaine de la programmation.pdf",
+        size:145,
+        type:"application/pdf",
+        lastModified: 1521909934578
+      }
     ];
 
     traiterFiles(files);
@@ -73,8 +79,8 @@ let mesFichiersCustom = [];
   }
 
   function traiterFiles(files){
-    forbiddens = $.map($('#forbidden').val().split(","), function(val, i){ return val.trim(); });
-    console.log(forbiddens);
+    forbiddens = $.map($('#forbidden').val().trim().replace(/\,$/g, '').split(","), function(val, i){ return val.trim(); });
+    // console.log(forbiddens);
     prefix = $('#prefix').val();
     suffix = $('#suffix').val();
     FichierCustom.forbiddenWords = forbiddens;
@@ -92,6 +98,7 @@ let mesFichiersCustom = [];
     console.log(mesFichiersCustom);
     for (fichierCustom of mesFichiersCustom) {
       fichierCustom.generateNewName();
+      // console.log(fichierCustom.newName);
     }
 
     $('#thnewname').show();
@@ -100,7 +107,7 @@ let mesFichiersCustom = [];
     let allNewNames = [];
     for (var i = 0; i < mesFichiersCustom.length; i++) {
 
-      let cellHTML = '<td class="tdnewname">'+mesFichiersCustom[i].getWithoutExt(mesFichiersCustom[i].newName)+'</td>';
+      let cellHTML = '<td class="tdnewname">'+mesFichiersCustom[i].newName+'</td>';
       $($firstCellsOfEachRowAvailable[i]).after(cellHTML);
 
       allNewNames.push(mesFichiersCustom[i].newName);
@@ -112,13 +119,17 @@ let mesFichiersCustom = [];
 
 
   function showFiles(fichiersCustom){
-    console.log(fichiersCustom);
+    // console.log(fichiersCustom);
     for (fichierCustom of fichiersCustom) {
       // console.log(file);
       //enlever le dernier element d'un split(".")
 
       // console.log(filenameWithoutExt);
-      $('tbody').append("<tr><td>"+fichierCustom.getWithoutExt(fichierCustom.originalName)+"</td><td>"+fichierCustom.originalSize+"</td><td>"+file.type+"</td><td>"+new Date(file.lastModified)+"</td></tr>");
+      $('tbody').append("<tr>"
+      +"<td>"+fichierCustom.getWithoutExt(fichierCustom.originalName)+"</td>"
+      +"<td>"+fichierCustom.originalSize+"</td>"
+      +"<td>"+file.type+"</td>"
+      +"<td>"+new Date(file.lastModified)+"</td></tr>");
     }
   }
 
