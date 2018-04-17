@@ -10,6 +10,7 @@ class FichierCustom {
     this.originalName = fileObj.name;
     this.originalSize = fileObj.size;
     this.originalDate = fileObj.name;
+    this.ext;
     this.newName;
     this.betterSize;
     this.betterDate;
@@ -68,15 +69,16 @@ class FichierCustom {
     return beautifiedName;
   }
 
-  set prefix(prefix){
+  static set prefix(prefix){
+    console.log("allo allo");
     FichierCustom.prefix = prefix;
   }
-  set suffix(suffix){
+  static set suffix(suffix){
     FichierCustom.suffix = suffix;
   }
-  set forbiddenWords(forbiddenWords){
-    FichierCustom.forbiddenWords = forbiddenWords;
-  }
+  // static set forbiddenWords(forbiddenWords){
+  //   FichierCustom.forbiddenWords = forbiddenWords;
+  // }
 
 
 }

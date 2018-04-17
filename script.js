@@ -73,6 +73,13 @@ let mesFichiersCustom = [];
   }
 
   function traiterFiles(files){
+    forbiddens = $.map($('#forbidden').val().split(","), function(val, i){ return val.trim(); });
+    console.log(forbiddens);
+    prefix = $('#prefix').val();
+    suffix = $('#suffix').val();
+    FichierCustom.forbiddenWords = forbiddens;
+    FichierCustom.prefix = prefix;
+    FichierCustom.suffix = suffix;
 
     for (file of files) {
       mesFichiersCustom.push(new FichierCustom(file));
