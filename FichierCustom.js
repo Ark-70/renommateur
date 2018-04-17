@@ -37,12 +37,21 @@ class FichierCustom {
     return strNoExt;
   }
 
+  getExt(str){
+    let ext = str.split(".");
+    ext = strNoExt.slice();
+    ext.splice(ext.length-2,ext.length-1);
+    this.ext = "."+ext;
+    return this.ext;
+  }
+
   generateNewName(){
     this.newName = this.beautifyName(this.normalizeNameToArr(this.originalName));
     return this.newName;
   }
 
   normalizeNameToArr(fileName){
+    fileName.split()
     let arrName = fileName.split(/[\s,\-_]+/);
     console.log(arrName);
     for (var i = 0; i < arrName.length; i++) {
@@ -69,13 +78,13 @@ class FichierCustom {
     return beautifiedName;
   }
 
-  static set prefix(prefix){
-    console.log("allo allo");
-    FichierCustom.prefix = prefix;
-  }
-  static set suffix(suffix){
-    FichierCustom.suffix = suffix;
-  }
+  // static set prefix(prefix){
+  //   console.log("allo allo");
+  //   FichierCustom.prefix = prefix;
+  // }
+  // static set suffix(suffix){
+  //   FichierCustom.suffix = suffix;
+  // }
   // static set forbiddenWords(forbiddenWords){
   //   FichierCustom.forbiddenWords = forbiddenWords;
   // }
