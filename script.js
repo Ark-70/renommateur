@@ -1,9 +1,19 @@
 $(function(){
+  // BUG qui va rester : NOMS & PRÉNOMS COMPOSÉS
 
-/*TODO*/
-// pour les mots à suppr, faire un split puis trim
-/*OPTIMIZE*/
+/*NOTE REVIEW*/
 // faire une classe Fichier avec toutes les méthodes
+// pour les mots à suppr, faire un split puis trim
+//
+/*TODO*/
+// prefix
+// suffix
+// faire un bouton d'échange Nom/Prénom
+/*BUG*/
+// Ca reset pas
+// BetterSize ne marche plus
+/*OPTIMIZE*/
+//
 
   // startWithTests(); // A ENLEVER NORMALEMENT NON ?
 
@@ -34,7 +44,7 @@ let mesFichiersCustom = [];
         lastModified: 1521773778421
       },
       {
-        name:"CV TRAPARIC David.pdf",
+        name:"CV TRAPARIC David 2K18.pdf",
         size:145,
         type:"application/pdf",
         lastModified: 1521909934578
@@ -57,18 +67,18 @@ let mesFichiersCustom = [];
     traiterFiles(files);
   }
 
-  document.querySelector('#validate').addEventListener("click", validateNewNames);
-  function validateNewNames(){
-    // $('#datas').val(myNewReadyFiles);
-    // if (myNewReadyFiles) {
-    //   $.post( "action.php", {newFiles: myNewReadyFiles}, function( reponse ) {
-    //     $('#dl').html(reponse);
-    //     console.log(reponse);
-    //   });
-    // }else{
-    //   console.log("ERROR : NOTHING IN myNewReadyFiles");
-    // }
-  }
+  // document.querySelector('#validate').addEventListener("click", validateNewNames);
+  // function validateNewNames(){
+  //   // $('#datas').val(myNewReadyFiles);
+  //   // if (myNewReadyFiles) {
+  //   //   $.post( "action.php", {newFiles: myNewReadyFiles}, function( reponse ) {
+  //   //     $('#dl').html(reponse);
+  //   //     console.log(reponse);
+  //   //   });
+  //   // }else{
+  //   //   console.log("ERROR : NOTHING IN myNewReadyFiles");
+  //   // }
+  // }
 
 
   function resetTable($table = $('table')){
@@ -79,8 +89,7 @@ let mesFichiersCustom = [];
   }
 
   function traiterFiles(files){
-    forbiddens = $.map($('#forbidden').val().trim().replace(/\,$/g, '').split(","), function(val, i){ return val.trim(); });
-    // console.log(forbiddens);
+    forbiddens = $.map($('#forbidden').val().toLowerCase().trim().replace(/\,$/g, '').split(","), function(val, i){ return val.trim(); });
     prefix = $('#prefix').val();
     suffix = $('#suffix').val();
     FichierCustom.forbiddenWords = forbiddens;

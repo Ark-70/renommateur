@@ -52,15 +52,21 @@ class FichierCustom {
 
   normalizeNameToArr(fileName){
     fileName = fileName.toLowerCase();
-    console.log(FichierCustom.forbiddenWords);
     for (let word of FichierCustom.forbiddenWords) {
       let indexWord = fileName.search(word);
       if (indexWord!=-1) {
+        console.log(fileName);
+
         fileName = fileName.slice(0,indexWord)+fileName.slice(indexWord+word.length);
+
+        console.log(fileName);
       }
     }
 
-    let arrName = fileName.trim().split(/[\s,\-_.]+/);
+    let arrName = fileName.split(/[\s,\-_.]+/);
+    while (arrName.indexOf("")!=-1){
+      arrName.splice(arrName.indexOf(""),1);
+    }
     console.log(arrName);
 
     return arrName;
@@ -75,11 +81,17 @@ class FichierCustom {
     arrName[0] = arrName[0].toUpperCase();
     // console.log(arrName);
     if (arrName.length>=2) {
-      // arrName[1][0] = arrName[1][0].toUpperCase(); //marche pas ???
-      arrName[1] = arrName[1][0].toUpperCase()+arrName[1].slice(1, arrName[1].length);
+      arrName[1] = this.upperFirstLetter(arrName[1])
+      if(arrName.length>2) {
+        arrName[2] = this.upperFirstLetter(arrName[2])
+      }
     }
     let beautifiedName = arrName.join(' ');
     return beautifiedName;
+  }
+
+  upperFirstLetter(word){
+    return word[0].toUpperCase()+word.slice(1, word.length);
   }
 
   // static set prefix(prefix){
