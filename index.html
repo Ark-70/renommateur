@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
+  section{
+    margin:5em 1em;
+  }
+
   td, th, table{
     border:1px solid black;
     border-collapse: collapse;
@@ -28,40 +32,45 @@
   <title>Renommateur</title>
 </head>
 <body>
-  <h1>Renommer tout sous la forme [NOM Prénom Domaine].pdf</h1>
-  <button id="tester">Tester avec des données préremplies</button>
-  <p>
-    <label for="">Supprimer des groupes de mots particuliers <small>(non sensibles à la casse et à séparer par des ", ")</small> : </label>
-    <input id="forbidden" type="text" value="cv, lettre de motivation, 2k18, " size="55">
-  </p>
-  <p><label for="">Ajouter un préfixe <small>(par défaut aucun)</small> : </label><input id="prefix" type="text" placeholder='Exemple : TSI'></p>
-  <p><label for="">Ajouter un suffixe <small>(par défaut aucun)</small> : </label><input id="suffix" type="text" placeholder='Exemple : 2018'></p>
-  <p><label for="">Séparateur de mots particulier <small>(par défaut un espace)</small> : </label><input id="separator" type="text" placeholder='Exemple : ", "'></p>
-
   <form action="action.php" method="POST" enctype="multipart/form-data">
-    <p>
-      <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-      <input name="userfiles[]" id="dir_input" type="file" webkitdirectory="" directory="" multiple="">
-    </p>
-    <table>
-      <thead>
-        <tr>
-          <th>Nom d'origine du fichier</th>
-          <th>Nouveau nom</th>
-          <th>Poids</th>
-          <th>Type/Extension</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
+    <section>
+      <h1>Renommer tous les fichiers d'un dossier sous la forme [NOM Prénom Domaine].pdf</h1>
+      <p style="font-size:1.2rem; color:red;">⇒<button id="tester">Tester avec des données préremplies</button>⇐</p>
+      <p>
+        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+        <input name="userfiles[]" id="dir_input" type="file" webkitdirectory="" directory="" multiple="">
+      </p>
+    </section>
+    <section>
+      <p>
+        <label for="">Supprimer des groupes de mots particuliers <small>(non sensibles à la casse et à séparer par des ", ")</small> : </label>
+        <input id="forbidden" type="text" value="cv, lettre de motivation, 2k18, " size="55">
+      </p>
+      <p><label for="">Ajouter un préfixe <small>(par défaut aucun)</small> : </label><input id="prefix" type="text" placeholder='Exemple : TSI'></p>
+      <p><label for="">Ajouter un suffixe <small>(par défaut aucun)</small> : </label><input id="suffix" type="text" placeholder='Exemple : 2018'></p>
+      <p><label for="">Séparateur de mots particulier <small>(par défaut un espace)</small> : </label><input id="separator" type="text" placeholder='Exemple : ", "'></p>
+      <p><button id="apply" type="submit" hidden>Réappliquer mes changements de paramêtres</button></p>
+    </section>
+    <section>
+      <table hidden>
+        <thead>
+          <tr>
+            <th>Nom d'origine du fichier</th>
+            <th>Nouveau nom proposé (éditable !)</th>
+            <th>Poids</th>
+            <th>Type/Extension</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
 
-      </tbody>
-    </table>
-    <!-- pour être plus correcte & sémantique, pour du ajax et sans form, plutôt submit ou button ? -->
-    <input name="names" id="datanames" type="hidden">
-    <p><button id="apply" type="submit" hidden>Appliquer les changements de paramêtres</button></p>
-    <p><button id="validate" type="submit" hidden>Valider ces nouveaux noms</button></p>
-  </form>
+        </tbody>
+      </table>
+        <!-- pour être plus correcte & sémantique, pour du ajax et sans form, plutôt submit ou button ? -->
+      <input name="names" id="datanames" type="hidden">
+      <p><button id="validate" type="submit" hidden>Valider ces nouveaux noms</button></p>
+    </form>
+  </section>
   <!-- <p id="dl"></p> -->
 
 </body>

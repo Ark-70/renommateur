@@ -40,17 +40,12 @@ class FichierCustom {
     return strNoExt;
   }
 
-  getExt(str){
+  getExt(str = this.originalName){
     let ext = str.split(".");
-    ext = strNoExt.slice();
     ext.splice(ext.length-2,ext.length-1);
     ext = "."+ext;
     this.ext = ext;
     return this.ext;
-  }
-
-  addBackExt(str){
-    return str+this.ext;
   }
 
   generateNewName(){
@@ -86,7 +81,7 @@ class FichierCustom {
     while (arrName.indexOf("")!=-1){
       arrName.splice(arrName.indexOf(""),1);
     }
-    console.log(arrName);
+    console.log("ici normalement tous les vides sont enlevés : ",arrName);
 
     return arrName;
   }
@@ -109,9 +104,9 @@ class FichierCustom {
   }
 
   addPrefixSuffix(arrName){
-    if(FichierCustom.hasOwnProperty('prefix')) arrName.unshift(FichierCustom.prefix);
-    console.log(arrName);
-    if(FichierCustom.hasOwnProperty('suffix')) arrName.push(FichierCustom.suffix);
+    // Si prefix exite et Si il n'est pas vide, on l'insère
+    if(FichierCustom.hasOwnProperty('prefix')) if(FichierCustom.prefix.trim()!=="") arrName.unshift(FichierCustom.prefix);
+    if(FichierCustom.hasOwnProperty('suffix')) if(FichierCustom.prefix.trim()!=="") arrName.push(FichierCustom.suffix);
     return arrName;
   }
 

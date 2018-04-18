@@ -17,7 +17,6 @@ $(function(){
 
   // startWithTests(); // A ENLEVER NORMALEMENT NON ?
 
-let myNewReadyFiles = null;
 let mesFichiersCustom = [];
 
   document.querySelector('#tester').addEventListener("click", startWithTests);
@@ -59,6 +58,7 @@ let mesFichiersCustom = [];
     ];
 
     $("tbody").empty();
+    $('table').show();
     traiterFiles(files);
   }
 
@@ -66,8 +66,8 @@ let mesFichiersCustom = [];
   function startFromInputs(){
     let files = $('#dir_input')[0].files;
     // $('table').empty();
-    $('table').find('tbody').empty();
     $("tbody").empty();
+    $('table').show();
     traiterFiles(files);
   }
 
@@ -95,12 +95,14 @@ let mesFichiersCustom = [];
     $firstCellsOfEachRowAvailable = $('td:first-child');
 
     let allNewNames = [];
-    for (var i = 0; i < mesFichiersCustom.length; i++) {
-
-      let cellHTML = '<td class="tdnewname">'+mesFichiersCustom[i].newName+'</td>';
+    for (let i = 0; i < mesFichiersCustom.length; i++) {
+      // on affiche dans la table les nouveaux noms
+      let cellHTML = '<td class="tdnewname" style="text-align:center;"><input type="text" style="width:95%;" size="'+(mesFichiersCustom[i].newName.length+3)+'" value="'+mesFichiersCustom[i].newName+'"></td>';
       $($firstCellsOfEachRowAvailable[i]).after(cellHTML);
 
-      allNewNames.push(mesFichiersCustom[i].newName);
+      // on ajoute l'extension nécessaire pour le php
+
+      allNewNames.push(mesFichiersCustom[i].newName+mesFichiersCustom[i].getExt());
     }
 
     $('#datanames').val(JSON.stringify(allNewNames));
