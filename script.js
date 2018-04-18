@@ -4,14 +4,14 @@ $(function(){
 /*NOTE REVIEW*/
 // faire une classe Fichier avec toutes les méthodes
 // pour les mots à suppr, faire un split puis trim
-//
-/*TODO*/
+// reset table
+// BetterSize
 // prefix
 // suffix
+//
+/*TODO*/
 // faire un bouton d'échange Nom/Prénom
 /*BUG*/
-// Ca reset pas
-// BetterSize ne marche plus
 /*OPTIMIZE*/
 //
 
@@ -22,17 +22,18 @@ let mesFichiersCustom = [];
 
   document.querySelector('#tester').addEventListener("click", startWithTests);
   function startWithTests(){
-    $('#tester').attr("disabled",true);
+    // $('#tester').attr("disabled",true);
+    $('table').find('tbody').empty();
     let files = [
       {
-        name:"CV-TRAPARIC_David.pdf",
+        name:"CV-TRAPARIC-David.pdf",
         size:2276,
         type:"application/pdf",
         lastModified: 1521831949827
       }
       ,
       {
-        name:"TRAPARIC DAVID.pdf",
+        name:"TRAPARIC_DAVID_DÉVELOPPEMENT.pdf",
         size:1452,
         type:"application/pdf",
         lastModified: 1521788145876
@@ -50,42 +51,24 @@ let mesFichiersCustom = [];
         lastModified: 1521909934578
       },
       {
-        name:"CV Lettre de motivation - TRAPARIC David - Domaine de la programmation.pdf",
-        size:145,
+        name:"CV Lettre de motivation - TRAPARIC David - domaine de la programmation.pdf",
+        size:18574,
         type:"application/pdf",
         lastModified: 1521909934578
       }
     ];
 
+    $("tbody").empty();
     traiterFiles(files);
   }
 
   document.querySelector('#dir_input').addEventListener("change", startFromInputs);
   function startFromInputs(){
     let files = $('#dir_input')[0].files;
-
+    // $('table').empty();
+    $('table').find('tbody').empty();
+    $("tbody").empty();
     traiterFiles(files);
-  }
-
-  // document.querySelector('#validate').addEventListener("click", validateNewNames);
-  // function validateNewNames(){
-  //   // $('#datas').val(myNewReadyFiles);
-  //   // if (myNewReadyFiles) {
-  //   //   $.post( "action.php", {newFiles: myNewReadyFiles}, function( reponse ) {
-  //   //     $('#dl').html(reponse);
-  //   //     console.log(reponse);
-  //   //   });
-  //   // }else{
-  //   //   console.log("ERROR : NOTHING IN myNewReadyFiles");
-  //   // }
-  // }
-
-
-  function resetTable($table = $('table')){
-    $table.find($('#thnewname')).hide();
-    // $('.tdnewname').remove();
-    console.log( $table.find($('tbody tr')));
-    $('table').find($('tbody tr')).remove();
   }
 
   function traiterFiles(files){
@@ -96,21 +79,19 @@ let mesFichiersCustom = [];
     FichierCustom.prefix = prefix;
     FichierCustom.suffix = suffix;
 
+    mesFichiersCustom = []
     for (file of files) {
       mesFichiersCustom.push(new FichierCustom(file));
     }
 
-    resetTable();
     showFiles(mesFichiersCustom);
     let myNames = [];
     console.log("tab de base : ");
     console.log(mesFichiersCustom);
     for (fichierCustom of mesFichiersCustom) {
       fichierCustom.generateNewName();
-      // console.log(fichierCustom.newName);
     }
 
-    $('#thnewname').show();
     $firstCellsOfEachRowAvailable = $('td:first-child');
 
     let allNewNames = [];
@@ -123,55 +104,20 @@ let mesFichiersCustom = [];
     }
 
     $('#datanames').val(JSON.stringify(allNewNames));
+    $('#apply').show();
     $('#validate').show();
   }
 
 
   function showFiles(fichiersCustom){
-    // console.log(fichiersCustom);
     for (fichierCustom of fichiersCustom) {
-      // console.log(file);
-      //enlever le dernier element d'un split(".")
-
-      // console.log(filenameWithoutExt);
       $('tbody').append("<tr>"
       +"<td>"+fichierCustom.getWithoutExt(fichierCustom.originalName)+"</td>"
-      +"<td>"+fichierCustom.originalSize+"</td>"
+      +"<td>"+fichierCustom.getBetterSize()+"</td>"
       +"<td>"+file.type+"</td>"
       +"<td>"+new Date(file.lastModified)+"</td></tr>");
     }
   }
 
-  function beautifyNames(arrNames){
-    // for (let i = 0; i < arrNames.length; i++) {
-    //   let tmpI = arrNames[i].indexOf("cv");
-    //   if(tmpI!=-1) arrNames[i].splice(tmpI, 1);
-    //   // Enlever des mots
-    //
-    //   // Mettre le premier mot (supposé NOM) en maj
-    //   arrNames[i][0] = arrNames[i][0].toUpperCase();
-    //   console.log(arrNames[i]);
-    //   if (arrNames[i].length>=2) {
-    //     // arrNames[i][1][0] = arrNames[i][1][0].toUpperCase(); //marche pas ???
-    //     arrNames[i][1] = arrNames[i][1][0].toUpperCase()+arrNames[i][1].slice(1, arrNames[i][1].length);
-    //     console.log(arrNames[i][1][0]);
-    //   }
-    // }
-
-    // let tmpBeautifiedArrNames = [];
-    // console.log("aha");
-    // for (let i = 0; i < arrNames.length; i++) {
-    //   tmpBeautifiedArrNames[i] = arrNames[i].join(' ');
-    // }
-    // return tmpBeautifiedArrNames;
-  }
-
-
-  // function getWithoutExt(str){
-  //   strNoExt = str.split(".");
-  //   strNoExt.splice(strNoExt.length-1,1);
-  //   strNoExt = strNoExt.join(".");
-  //   return strNoExt
-  // }
 
 });

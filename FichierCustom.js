@@ -4,6 +4,10 @@ class FichierCustom {
     // variables partagées entre toutes les instances de la classes, qui ne changeront pas
     // Pas sûr que le static variable soit pris en compte en ES6
 
+    // static forbiddenWords
+    // static prefix
+    // static suffix
+    // static separator
 
     this.originalName = fileObj.name;
     this.originalSize = fileObj.size;
@@ -15,7 +19,7 @@ class FichierCustom {
   }
 
   getBetterSize(){
-    mySize = this.originalSize;
+    let mySize = this.originalSize;
     if(mySize>=(Math.pow(1024,2))){
       mySize = Number(mySize/(Math.pow(1024,2))).toFixed(2) + " Mo";
     }else if(mySize>=(1024)){
@@ -42,15 +46,27 @@ class FichierCustom {
     ext.splice(ext.length-2,ext.length-1);
     ext = "."+ext;
     this.ext = ext;
-    return ext;
+    return this.ext;
+  }
+
+  addBackExt(str){
+    return str+this.ext;
   }
 
   generateNewName(){
-    this.newName = this.beautifyName(this.normalizeNameToArr(this.getWithoutExt(this.originalName)));
+    let name = this.originalName;
+    name = this.cleanForbiddenWords(name);
+    name = this.getWithoutExt(name);
+    name = this.normalizeNameToArr(name);
+    name = this.upperCaseNorm(name);
+    name = this.addPrefixSuffix(name);
+    name = this.joinWithSeparator(name);
+    // this.newName = this.upperCaseNorm(this.normalizeNameToArr(this.getWithoutExt(this.originalName)));
+    this.newName = name;
     return this.newName;
   }
 
-  normalizeNameToArr(fileName){
+  cleanForbiddenWords(fileName){
     fileName = fileName.toLowerCase();
     for (let word of FichierCustom.forbiddenWords) {
       let indexWord = fileName.search(word);
@@ -62,7 +78,10 @@ class FichierCustom {
         console.log(fileName);
       }
     }
+    return fileName;
+  }
 
+  normalizeNameToArr(fileName){
     let arrName = fileName.split(/[\s,\-_.]+/);
     while (arrName.indexOf("")!=-1){
       arrName.splice(arrName.indexOf(""),1);
@@ -72,11 +91,7 @@ class FichierCustom {
     return arrName;
   }
 
-  beautifyName(arrName){
-    // let tmpI = arrName.indexOf("cv");
-    // if(tmpI!=-1) arrName.splice(tmpI, 1);
-    // Enlever des mots
-
+  upperCaseNorm(arrName){
     // Mettre le premier mot (supposé NOM) en maj
     arrName[0] = arrName[0].toUpperCase();
     // console.log(arrName);
@@ -86,12 +101,23 @@ class FichierCustom {
         arrName[2] = this.upperFirstLetter(arrName[2])
       }
     }
-    let beautifiedName = arrName.join(' ');
-    return beautifiedName;
+    return arrName;
   }
 
   upperFirstLetter(word){
     return word[0].toUpperCase()+word.slice(1, word.length);
+  }
+
+  addPrefixSuffix(arrName){
+    if(FichierCustom.hasOwnProperty('prefix')) arrName.unshift(FichierCustom.prefix);
+    console.log(arrName);
+    if(FichierCustom.hasOwnProperty('suffix')) arrName.push(FichierCustom.suffix);
+    return arrName;
+  }
+
+  joinWithSeparator(arrName){
+    let shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
+    return arrName.join(shlasseur);
   }
 
   // static set prefix(prefix){
