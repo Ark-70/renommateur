@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
   section{
-    margin:5em 1em;
+    margin:0 1em 4em;
   }
 
   td, th, table{
@@ -35,7 +35,7 @@
   <form action="action.php" method="POST" enctype="multipart/form-data">
     <section>
       <h1>Renommer tous les fichiers d'un dossier sous la forme [NOM Prénom Domaine].pdf</h1>
-      <p style="font-size:1.2rem; color:red;">⇒<button id="tester">Tester avec des données préremplies</button>⇐</p>
+      <p style="font-size:1.2rem; color:red;">⇒<button type="button" id="tester">Tester avec des données préremplies</button>⇐</p>
       <p>
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
         <input name="userfiles[]" id="dir_input" type="file" webkitdirectory="" directory="" multiple="">
@@ -49,7 +49,7 @@
       <p><label for="">Ajouter un préfixe <small>(par défaut aucun)</small> : </label><input id="prefix" type="text" placeholder='Exemple : TSI'></p>
       <p><label for="">Ajouter un suffixe <small>(par défaut aucun)</small> : </label><input id="suffix" type="text" placeholder='Exemple : 2018'></p>
       <p><label for="">Séparateur de mots particulier <small>(par défaut un espace)</small> : </label><input id="separator" type="text" placeholder='Exemple : ", "'></p>
-      <p><button id="apply" type="submit" hidden>Réappliquer mes changements de paramêtres</button></p>
+      <p><button id="apply" type="button" hidden>Réappliquer mes changements de paramêtres</button></p>
     </section>
     <section>
       <table hidden>

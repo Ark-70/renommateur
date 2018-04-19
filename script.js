@@ -97,19 +97,17 @@ let mesFichiersCustom = [];
     let allNewNames = [];
     for (let i = 0; i < mesFichiersCustom.length; i++) {
       // on affiche dans la table les nouveaux noms
-      let cellHTML = '<td class="tdnewname" style="text-align:center;"><input type="text" style="width:95%;" size="'+(mesFichiersCustom[i].newName.length+3)+'" value="'+mesFichiersCustom[i].newName+'"></td>';
+      let cellHTML = '<td class="tdnewname" style="text-align:center;"><input type="text" style="width:95%;" size="'+(mesFichiersCustom[i].newName.length+5)+'" value="'+mesFichiersCustom[i].newName+'"></td>';
       $($firstCellsOfEachRowAvailable[i]).after(cellHTML);
 
       // on ajoute l'extension nécessaire pour le php
 
-      allNewNames.push(mesFichiersCustom[i].newName+mesFichiersCustom[i].getExt());
     }
 
-    $('#datanames').val(JSON.stringify(allNewNames));
+    // $('#datanames').val(JSON.stringify(allNewNames));
     $('#apply').show();
     $('#validate').show();
   }
-
 
   function showFiles(fichiersCustom){
     for (fichierCustom of fichiersCustom) {
@@ -119,6 +117,16 @@ let mesFichiersCustom = [];
       +"<td>"+file.type+"</td>"
       +"<td>"+new Date(file.lastModified)+"</td></tr>");
     }
+  }
+
+  document.querySelector('#dir_input').addEventListener("change", insertDataBeforePost);
+  function insertDataBeforePost() {
+    let allNewNames = [];
+    // for (variable of $('.tdnewname input')) {
+    for (let i = 0; i < $(variable).length; i++) {
+      allNewNames.push($($(variable)[0]).val()+mesFichiersCustom[i].getExt();
+    }
+    $('#datanames').val(JSON.stringify(allNewNames));
   }
 
 
