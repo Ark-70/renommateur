@@ -8,9 +8,11 @@ $(function(){
 // BetterSize
 // prefix
 // suffix
+// faire un bouton d'échange Nom/Prénom
 //
 /*TODO*/
-// faire un bouton d'échange Nom/Prénom
+// Vraiment apply sur ce qu'il y a dans les inputs
+// Montages des profs à dl dans les tests
 /*BUG*/
 /*OPTIMIZE*/
 //
@@ -62,6 +64,7 @@ let mesFichiersCustom = [];
     traiterFiles(files);
   }
 
+  document.querySelector('#apply').addEventListener("click", startFromInputs);
   document.querySelector('#dir_input').addEventListener("change", startFromInputs);
   function startFromInputs(){
     let files = $('#dir_input')[0].files;
@@ -113,21 +116,34 @@ let mesFichiersCustom = [];
     for (fichierCustom of fichiersCustom) {
       $('tbody').append("<tr>"
       +"<td>"+fichierCustom.getWithoutExt(fichierCustom.originalName)+"</td>"
+      +"<td><button type='button' style='font-size:1.1em; width:100%; line-height:1.1em; padding:0;'>⇄</button></td>"
       +"<td>"+fichierCustom.getBetterSize()+"</td>"
       +"<td>"+file.type+"</td>"
       +"<td>"+new Date(file.lastModified)+"</td></tr>");
     }
   }
 
-  document.querySelector('#dir_input').addEventListener("change", insertDataBeforePost);
+  $( "tbody" ).on( "click", "tr button", function() {
+    console.log(this);
+    console.log($('tbody tr button'));
+    let indexTmp = $('tbody tr button').toArray().indexOf(this);
+    let inputTmp = $('.tdnewname input')[indexTmp];
+    let name = $(inputTmp).val();
+    let reversedName = mesFichiersCustom[indexTmp].reverseName(name);
+    $(inputTmp).val(reversedName);
+  });
+
+  document.querySelector('#validate').addEventListener("click", insertDataBeforePost);
   function insertDataBeforePost() {
     let allNewNames = [];
-    // for (variable of $('.tdnewname input')) {
-    for (let i = 0; i < $(variable).length; i++) {
-      allNewNames.push($($(variable)[0]).val()+mesFichiersCustom[i].getExt();
+    let $inputsNewName = $('.tdnewname input');
+    for (let i = 0; i < $inputsNewName.length; i++) {
+
+      allNewNames.push( $($inputsNewName[i]).val()+mesFichiersCustom[i].getExt() );
     }
     $('#datanames').val(JSON.stringify(allNewNames));
   }
+
 
 
 });

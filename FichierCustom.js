@@ -48,7 +48,9 @@ class FichierCustom {
     return this.ext;
   }
 
+
   generateNewName(){
+
     let name = this.originalName;
     name = this.cleanForbiddenWords(name);
     name = this.getWithoutExt(name);
@@ -60,6 +62,7 @@ class FichierCustom {
     this.newName = name;
     return this.newName;
   }
+
 
   cleanForbiddenWords(fileName){
     fileName = fileName.toLowerCase();
@@ -115,6 +118,27 @@ class FichierCustom {
     return arrName.join(shlasseur);
   }
 
+  reverseName(name){
+    let hasPrefix;
+    let shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
+    if(FichierCustom.hasOwnProperty('prefix')) if(FichierCustom.prefix.trim()!=="") hasPrefix = true;
+
+    let arrName = name.split(shlasseur);
+    let nameAndFirstNameOnly = (hasPrefix) ? arrName.splice(0, 3) : arrName.splice(0, 2);
+    console.log(nameAndFirstNameOnly);
+    let namesReversed = [];
+    if(hasPrefix){
+      namesReversed[0] = nameAndFirstNameOnly[0];
+      namesReversed[1] = nameAndFirstNameOnly[2].toLowerCase();
+      namesReversed[2] = nameAndFirstNameOnly[1].toLowerCase();
+    }else{
+      namesReversed[0] = nameAndFirstNameOnly[1].toLowerCase();
+      namesReversed[1] = nameAndFirstNameOnly[0].toLowerCase();
+    }
+    let reversedArrName = this.upperCaseNorm(namesReversed.concat(arrName));
+
+    return this.joinWithSeparator(reversedArrName);
+  }
   // static set prefix(prefix){
   //   console.log("allo allo");
   //   FichierCustom.prefix = prefix;
