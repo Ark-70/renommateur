@@ -3,35 +3,46 @@ require 'myzipmaker.php';
 
 $DEBUG = true;
 
-$filesToZipLocations = $_FILES['userfiles']['tmp_name'];
-if($DEBUG) var_dump($filesToZipLocations);
+$newNames = json_decode($_POST['names']);
+
 if($_POST["mode"]=="testing"){
 // en fait pas de if/else, juste un if puis pattern normal avec if test => remplir les FILES userfiles tmpname vers des vrais fichiers
+  $filesToZipLocations = [
+    './src/airman.png',
+    './src/crane.jpg',
+    './src/sylvaindurif.jpg',
+    './src/sylvaindurif2.png',
+    './src/sylvaindurif3.png',
+    './src/zlataille.jpg'
+  ];
 }else{
-  $newNames = json_decode($_POST['names']);
-  if($DEBUG) var_dump($newNames);
+  $filesToZipLocations = $_FILES['userfiles']['tmp_name'];
+}
 
-  $nomZip = 'les_cv_de_mes_petits_mmi';
-  $zipArchive = create_zip($filesToZipLocations, $newNames, $nomZip.'.zip');
+if($DEBUG) var_dump($filesToZipLocations);
+if($DEBUG) var_dump($newNames);
+die;
 
-  if($zipArchive!==false){
-    //Set Headers:
-    header("Content-type: application/zip");
-    header("Content-Disposition: attachment; filename=".$zipArchive);
-    header('Pragma: public');
-    header('Expires: 0');
-    header('Content-Transfer-Encoding: binary');
-    header('Content-Length: ' . filesize($zipArchive));
-    readfile($zipArchive);
-    exit();
-  }else{
-    var_dump('ntm');
+$nomZip = 'les_cv_de_mes_petits_mmi';
+$zipArchive = create_zip($filesToZipLocations, $newNames, $nomZip.'.zip');
 
-  }
+if($zipArchive!==false){
+  //Set Headers:
+  header("Content-type: application/zip");
+  header("Content-Disposition: attachment; filename=".$zipArchive);
+  header('Pragma: public');
+  header('Expires: 0');
+  header('Content-Transfer-Encoding: binary');
+  header('Content-Length: ' . filesize($zipArchive));
+  readfile($zipArchive);
+  exit();
+}else{
+  var_dump('ntm');
 
-  if($zipArchive!==false){
-    unlink($zipArchive);
-  }
+}
+
+if($zipArchive!==false){
+  unlink($zipArchive);
 }
 
 

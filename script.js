@@ -11,6 +11,8 @@ $(function(){
 // faire un bouton d'échange Nom/Prénom
 //
 /*TODO*/
+// Full bug pour choper le 3e newName de test
+// le séparateur marche pas du tout
 // this.betterDate()
 // Vraiment apply sur ce qu'il y a dans les inputs
 // Montages des profs à dl dans les tests
