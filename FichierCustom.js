@@ -95,8 +95,10 @@ class FichierCustom {
     // console.log(arrName);
     if (arrName.length>=2) {
       arrName[1] = this.upperFirstLetter(arrName[1])
+      console.log(arrName);
       if(arrName.length>2) {
         arrName[2] = this.upperFirstLetter(arrName[2])
+        console.log("gsdfg2");
       }
     }
     return arrName;
@@ -120,6 +122,7 @@ class FichierCustom {
 
   reverseName(name){
     let hasPrefix;
+    let prefix;
     let shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
     if(FichierCustom.hasOwnProperty('prefix')) if(FichierCustom.prefix.trim()!=="") hasPrefix = true;
 
@@ -128,14 +131,15 @@ class FichierCustom {
     console.log(nameAndFirstNameOnly);
     let namesReversed = [];
     if(hasPrefix){
-      namesReversed[0] = nameAndFirstNameOnly[0];
-      namesReversed[1] = nameAndFirstNameOnly[2].toLowerCase();
-      namesReversed[2] = nameAndFirstNameOnly[1].toLowerCase();
-    }else{
-      namesReversed[0] = nameAndFirstNameOnly[1].toLowerCase();
-      namesReversed[1] = nameAndFirstNameOnly[0].toLowerCase();
+      prefix = nameAndFirstNameOnly.splice(0,1);
     }
-    let reversedArrName = this.upperCaseNorm(namesReversed.concat(arrName));
+    namesReversed[0] = nameAndFirstNameOnly[1].toLowerCase();
+    namesReversed[1] = nameAndFirstNameOnly[0].toLowerCase();
+
+    if(arrName.length>1 || arrName[0]!="") namesReversed = namesReversed.concat(arrName);
+
+    let reversedArrName = this.upperCaseNorm(namesReversed);
+    if(hasPrefix) reversedArrName = prefix.concat(reversedArrName);
 
     return this.joinWithSeparator(reversedArrName);
   }
