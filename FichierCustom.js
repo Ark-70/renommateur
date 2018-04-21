@@ -11,7 +11,8 @@ class FichierCustom {
 
     this.originalName = fileObj.name;
     this.originalSize = fileObj.size;
-    this.originalDate = fileObj.name;
+    this.originalDate = fileObj.lastModified;
+    this.originalType = fileObj.type;
     this.ext;
     this.newName;
     this.betterSize;
@@ -27,7 +28,6 @@ class FichierCustom {
     }else{
       mySize+=" octets"
     }
-    console.log("bettersize ",mySize);
     this.betterSize = mySize;
     return this.betterSize;
   }

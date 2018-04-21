@@ -11,6 +11,7 @@ $(function(){
 // faire un bouton d'échange Nom/Prénom
 //
 /*TODO*/
+// this.betterDate()
 // Vraiment apply sur ce qu'il y a dans les inputs
 // Montages des profs à dl dans les tests
 /*BUG*/
@@ -43,7 +44,7 @@ let mesFichiersCustom = [];
         name:"david.traparic.cv.pdf",
         size:45651213,
         type:"application/pdf",
-        lastModified: 1521773778421
+        lastModified: 1521773778
       },
       {
         name:"CV TRAPARIC David 2K18.pdf",
@@ -114,18 +115,19 @@ let mesFichiersCustom = [];
 
   function showFiles(fichiersCustom){
     for (fichierCustom of fichiersCustom) {
+      myDate = new Date(fichierCustom.originalDate);
       $('tbody').append("<tr>"
       +"<td>"+fichierCustom.getWithoutExt(fichierCustom.originalName)+"</td>"
       +"<td><button type='button' style='font-size:1.1em; width:100%; line-height:1.1em; padding:0;'>⇄</button></td>"
       +"<td>"+fichierCustom.getBetterSize()+"</td>"
-      +"<td>"+file.type+"</td>"
-      +"<td>"+new Date(file.lastModified)+"</td></tr>");
+      +"<td>"+fichierCustom.originalType+"</td>"
+      +"<td>"+myDate.toLocaleDateString()+" "+myDate.toLocaleTimeString()+"</td></tr>");
     }
   }
 
   $( "tbody" ).on( "click", "tr button", function() {
-    console.log(this);
-    console.log($('tbody tr button'));
+    // console.log(this);
+    // console.log($('tbody tr button'));
     let indexTmp = $('tbody tr button').toArray().indexOf(this);
     let inputTmp = $('.tdnewname input')[indexTmp];
     let name = $(inputTmp).val();
