@@ -41,8 +41,11 @@ class FichierCustom {
   }
 
   getExt(str = this.originalName){
+    console.log(str);
     let ext = str.split(".");
-    ext.splice(ext.length-2,ext.length-1);
+    // Je retire de tout le tableau, tout de 0 jusqu'au mot après le dernier "."
+    ext.splice(0, ext.length-1);
+    console.log("ext ", ext);
     ext = "."+ext;
     this.ext = ext;
     return this.ext;
@@ -116,7 +119,11 @@ class FichierCustom {
   }
 
   joinWithSeparator(arrName){
+    console.log("before separator", arrName);
+    console.log(FichierCustom.separator);
     let shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
+    console.log("shlasseur ", shlasseur);
+    console.log("slassé :", arrName.join(shlasseur));
     return arrName.join(shlasseur);
   }
 

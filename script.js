@@ -9,11 +9,10 @@ $(function(){
 // prefix
 // suffix
 // faire un bouton d'échange Nom/Prénom
+// this.betterDate()
 //
 /*TODO*/
-// Full bug pour choper le 3e newName de test
 // le séparateur marche pas du tout
-// this.betterDate()
 // Vraiment apply sur ce qu'il y a dans les inputs
 // Montages des profs à dl dans les tests
 /*BUG*/
@@ -88,9 +87,11 @@ let modeIsTesting = false;
     forbiddens = $.map($('#forbidden').val().toLowerCase().trim().replace(/\,$/g, '').split(","), function(val, i){ return val.trim(); });
     prefix = $('#prefix').val();
     suffix = $('#suffix').val();
+    separator = $('#separator').val();
     FichierCustom.forbiddenWords = forbiddens;
     FichierCustom.prefix = prefix;
     FichierCustom.suffix = suffix;
+    FichierCustom.separator = separator;
 
     mesFichiersCustom = []
     for (file of files) {
@@ -152,6 +153,7 @@ let modeIsTesting = false;
 
       allNewNames.push( $($inputsNewName[i]).val()+mesFichiersCustom[i].getExt() );
     }
+    console.log(allNewNames);
     $('#datanames').val(JSON.stringify(allNewNames));
   }
 
