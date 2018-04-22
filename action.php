@@ -1,13 +1,27 @@
 <?php
 require 'myzipmaker.php';
 
-$DEBUG = false;
-
-$filesToZipLocations = $_FILES['userfiles']['tmp_name'];
-if($DEBUG) var_dump($filesToZipLocations);
+$DEBUG = true;
 
 $newNames = json_decode($_POST['names']);
+
+if($_POST["mode"]=="testing"){
+// en fait pas de if/else, juste un if puis pattern normal avec if test => remplir les FILES userfiles tmpname vers des vrais fichiers
+  $filesToZipLocations = [
+    './src/airman.png',
+    './src/crane.jpg',
+    './src/sylvaindurif.jpg',
+    './src/sylvaindurif2.png',
+    './src/sylvaindurif3.png',
+    './src/zlataille.jpg'
+  ];
+}else{
+  $filesToZipLocations = $_FILES['userfiles']['tmp_name'];
+}
+
+if($DEBUG) var_dump($filesToZipLocations);
 if($DEBUG) var_dump($newNames);
+die;
 
 $nomZip = 'les_cv_de_mes_petits_mmi';
 $zipArchive = create_zip($filesToZipLocations, $newNames, $nomZip.'.zip');

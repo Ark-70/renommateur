@@ -9,9 +9,10 @@ $(function(){
 // prefix
 // suffix
 // faire un bouton d'échange Nom/Prénom
+// this.betterDate()
 //
 /*TODO*/
-// this.betterDate()
+// le séparateur marche pas du tout
 // Vraiment apply sur ce qu'il y a dans les inputs
 // Montages des profs à dl dans les tests
 /*BUG*/
@@ -21,6 +22,7 @@ $(function(){
   // startWithTests(); // A ENLEVER NORMALEMENT NON ?
 
 let mesFichiersCustom = [];
+let modeIsTesting = false;
 
   document.querySelector('#tester').addEventListener("click", startWithTests);
   function startWithTests(){
@@ -59,21 +61,27 @@ let mesFichiersCustom = [];
         lastModified: 1521909934578
       }
     ];
-
+    modeIsTesting = true;
+    $('#mode').val("testing");
     $("tbody").empty();
     $('table').show();
     traiterFiles(files);
   }
 
-  document.querySelector('#apply').addEventListener("click", startFromInputs);
   document.querySelector('#dir_input').addEventListener("change", startFromInputs);
   function startFromInputs(){
     let files = $('#dir_input')[0].files;
     // $('table').empty();
+    modeIsTesting = false;
+    $('#mode').val("uploaded");
     $("tbody").empty();
     $('table').show();
     traiterFiles(files);
   }
+
+  document.querySelector('#apply').addEventListener("click", function(){
+    if(modeIsTesting) startWithTests(); else startFromInputs();
+  });
 
   function traiterFiles(files){
     forbiddens = $.map($('#forbidden').val().toLowerCase().trim().replace(/\,$/g, '').split(","), function(val, i){ return val.trim(); });
@@ -145,6 +153,7 @@ let mesFichiersCustom = [];
 
       allNewNames.push( $($inputsNewName[i]).val()+mesFichiersCustom[i].getExt() );
     }
+    console.log(allNewNames);
     $('#datanames').val(JSON.stringify(allNewNames));
   }
 
