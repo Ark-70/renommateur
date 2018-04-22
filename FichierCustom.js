@@ -119,11 +119,11 @@ class FichierCustom {
   }
 
   joinWithSeparator(arrName){
-    let hasPrefix = false;
-    if (FichierCustom.hasOwnProperty('separator')){if(FichierCustom.prefix!="") hasPrefix = true}
-    let shlasseur = (hasPrefix) ? FichierCustom.separator : " ";
+    let hasSeparator = false;
+    if (FichierCustom.hasOwnProperty('separator')){if(FichierCustom.separator!="") hasSeparator = true}
+    let shlasseur = (hasSeparator) ? FichierCustom.separator : " ";
     console.log("L'heure est grave");
-    console.log("hasPrefix ", hasPrefix);
+    console.log("hasSeparator ", hasSeparator);
     console.log("shlasseur ", shlasseur);
     console.log("arrName ", arrName);
     return arrName.join(shlasseur);
@@ -132,8 +132,14 @@ class FichierCustom {
   reverseName(name){
     let hasPrefix;
     let prefix;
-    let shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
-    if(FichierCustom.hasOwnProperty('prefix')) if(FichierCustom.prefix.trim()!=="") hasPrefix = true;
+    let hasSeparator;
+    let shlasseur;
+
+    if (FichierCustom.hasOwnProperty('separator')){if(FichierCustom.separator!="") hasSeparator = true}
+
+    shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
+
+    if(FichierCustom.hasOwnProperty('prefix')){if(FichierCustom.prefix.trim()!=="") hasPrefix = true}
 
     let arrName = name.split(shlasseur);
     let nameAndFirstNameOnly = (hasPrefix) ? arrName.splice(0, 3) : arrName.splice(0, 2);

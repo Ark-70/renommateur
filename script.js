@@ -10,9 +10,9 @@ $(function(){
 // suffix
 // faire un bouton d'échange Nom/Prénom
 // this.betterDate()
+// le séparateur marche
 //
 /*TODO*/
-// le séparateur marche pas du tout
 // Vraiment apply sur ce qu'il y a dans les inputs
 // Montages des profs à dl dans les tests
 /*BUG*/
@@ -30,34 +30,40 @@ let modeIsTesting = false;
     $('table').find('tbody').empty();
     let files = [
       {
-        name:"CV-TRAPARIC-David.pdf",
+        name:"CV-TRAPARIC-David.png",
         size:2276,
-        type:"application/pdf",
+        type:"image/png",
         lastModified: 1521831949827
       }
       ,
       {
-        name:"TRAPARIC_DAVID_DÉVELOPPEMENT.pdf",
+        name:"TRAPARIC_DAVID_DÉVELOPPEMENT.jpg",
         size:1452,
-        type:"application/pdf",
+        type:"image/jpg",
         lastModified: 1521788145876
       },
       {
-        name:"david.traparic.cv.pdf",
+        name:"david.traparic.cv.jpg",
         size:45651213,
-        type:"application/pdf",
+        type:"image/jpg",
         lastModified: 1521773778
       },
       {
-        name:"CV TRAPARIC David 2K18.pdf",
+        name:"CV TRAPARIC David 2K18.png",
         size:145,
-        type:"application/pdf",
+        type:"image/png",
         lastModified: 1521909934578
       },
       {
-        name:"CV Lettre de motivation - TRAPARIC David - domaine de la programmation.pdf",
+        name:"Lettre de motivation - TRAPARIC David - programmation.png",
         size:18574,
-        type:"application/pdf",
+        type:"image/png",
+        lastModified: 1521909934578
+      },
+      {
+        name:"David Traparic CV : domaine de la programmation .png",
+        size:18574,
+        type:"image/jpg",
         lastModified: 1521909934578
       }
     ];
@@ -92,6 +98,7 @@ let modeIsTesting = false;
     FichierCustom.prefix = prefix;
     FichierCustom.suffix = suffix;
     FichierCustom.separator = separator;
+    console.log("MAIS BORDEL", FichierCustom.separator);
 
     mesFichiersCustom = []
     for (file of files) {
