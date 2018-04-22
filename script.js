@@ -79,9 +79,11 @@ let mesFichiersCustom = [];
     forbiddens = $.map($('#forbidden').val().toLowerCase().trim().replace(/\,$/g, '').split(","), function(val, i){ return val.trim(); });
     prefix = $('#prefix').val();
     suffix = $('#suffix').val();
+    separator = $('#separator').val();
     FichierCustom.forbiddenWords = forbiddens;
     FichierCustom.prefix = prefix;
     FichierCustom.suffix = suffix;
+    FichierCustom.separator = separator;
 
     mesFichiersCustom = []
     for (file of files) {
@@ -121,7 +123,7 @@ let mesFichiersCustom = [];
       +"<td><button type='button' style='font-size:1.1em; width:100%; line-height:1.1em; padding:0;'>⇄</button></td>"
       +"<td>"+fichierCustom.getBetterSize()+"</td>"
       +"<td>"+fichierCustom.originalType+"</td>"
-      +"<td>"+myDate.toLocaleDateString()+" "+myDate.toLocaleTimeString()+"</td></tr>");
+      +"<td>"+myDate.toLocaleString()+"</td></tr>");
     }
   }
 

@@ -114,7 +114,13 @@ class FichierCustom {
   }
 
   joinWithSeparator(arrName){
-    let shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
+    let hasPrefix = false;
+    if (FichierCustom.hasOwnProperty('separator')){if(FichierCustom.prefix!="") hasPrefix = true}
+    let shlasseur = (hasPrefix) ? FichierCustom.separator : " ";
+    console.log("L'heure est grave");
+    console.log("hasPrefix ", hasPrefix);
+    console.log("shlasseur ", shlasseur);
+    console.log("arrName ", arrName);
     return arrName.join(shlasseur);
   }
 
@@ -136,7 +142,7 @@ class FichierCustom {
       namesReversed[1] = nameAndFirstNameOnly[0].toLowerCase();
     }
     let reversedArrName = this.upperCaseNorm(namesReversed.concat(arrName));
-
+    console.log("ReversedArrName ", reversedArrName);
     return this.joinWithSeparator(reversedArrName);
   }
   // static set prefix(prefix){
