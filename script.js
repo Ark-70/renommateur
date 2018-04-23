@@ -19,8 +19,6 @@ $(function(){
 /*OPTIMIZE*/
 //
 
-  // startWithTests(); // A ENLEVER NORMALEMENT NON ?
-
 let mesFichiersCustom = [];
 let modeIsTesting = false;
 
@@ -43,15 +41,15 @@ let modeIsTesting = false;
         lastModified: 1521788145876
       },
       {
-        name:"david.traparic.cv.jpg",
+        name:"david.traparic.cv.gif",
         size:45651213,
-        type:"image/jpg",
+        type:"image/gif",
         lastModified: 1521773778
       },
       {
-        name:"CV TRAPARIC David 2K18.png",
+        name:"CV TRAPARIC David 2K18.jpg",
         size:145,
-        type:"image/png",
+        type:"image/jpg",
         lastModified: 1521909934578
       },
       {
@@ -61,7 +59,7 @@ let modeIsTesting = false;
         lastModified: 1521909934578
       },
       {
-        name:"David Traparic CV : domaine de la programmation .png",
+        name:"David Traparic CV : domaine de la programmation .jpg",
         size:18574,
         type:"image/jpg",
         lastModified: 1521909934578

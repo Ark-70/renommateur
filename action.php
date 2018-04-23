@@ -11,8 +11,8 @@ if($_POST["mode"]=="testing"){
   $filesToZipLocations = [
     './src/airman.png',
     './src/crane.jpg',
+    './src/memegif.gif',
     './src/sylvaindurif.jpg',
-    './src/sylvaindurif2.png',
     './src/sylvaindurif3.png',
     './src/zlataille.jpg'
   ];

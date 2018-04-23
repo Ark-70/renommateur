@@ -26,7 +26,7 @@ function create_zip($filesLocations = array(), $filesNames, $destination = '', $
 
     // $zip->open($destination, $overwrite? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE);
     // var_dump($zip->status);
-    $couille = $zip->open($destination, ZipArchive::OVERWRITE);
+    $couille = $zip->open($destination, ZipArchive::OVERWRITE | ZipArchive::CREATE);
     if($couille !== true) {
       var_dump($couille);
       die;
