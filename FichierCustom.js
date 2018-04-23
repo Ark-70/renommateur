@@ -136,18 +136,14 @@ class FichierCustom {
     let shlasseur;
 
     if (FichierCustom.hasOwnProperty('separator')){if(FichierCustom.separator!="") hasSeparator = true}
-
-    shlasseur = (FichierCustom.hasOwnProperty('separator')) ? FichierCustom.separator : " ";
-
+    shlasseur = (hasPrefix) ? FichierCustom.separator : " ";
     if(FichierCustom.hasOwnProperty('prefix')){if(FichierCustom.prefix.trim()!=="") hasPrefix = true}
+    if(hasPrefix) prefix = nameAndFirstNameOnly.splice(0,1);
 
     let arrName = name.split(shlasseur);
     let nameAndFirstNameOnly = (hasPrefix) ? arrName.splice(0, 3) : arrName.splice(0, 2);
     console.log(nameAndFirstNameOnly);
     let namesReversed = [];
-    if(hasPrefix){
-      prefix = nameAndFirstNameOnly.splice(0,1);
-    }
     namesReversed[0] = nameAndFirstNameOnly[1].toLowerCase();
     namesReversed[1] = nameAndFirstNameOnly[0].toLowerCase();
 

@@ -1,9 +1,10 @@
 <?php
 require 'myzipmaker.php';
 
-$DEBUG = true;
-
+$DEBUG = false;
 $newNames = json_decode($_POST['names']);
+
+$handle = fopen("./TAMERE.txt", "w+");
 
 if($_POST["mode"]=="testing"){
 // en fait pas de if/else, juste un if puis pattern normal avec if test => remplir les FILES userfiles tmpname vers des vrais fichiers
@@ -19,13 +20,16 @@ if($_POST["mode"]=="testing"){
   $filesToZipLocations = $_FILES['userfiles']['tmp_name'];
 }
 
+if($DEBUG) var_dump(is_writable("."));
+if($DEBUG) var_dump($newNames);
 if($DEBUG) var_dump($filesToZipLocations);
 if($DEBUG) var_dump($newNames);
-die;
 
 $nomZip = 'les_cv_de_mes_petits_mmi';
 $zipArchive = create_zip($filesToZipLocations, $newNames, $nomZip.'.zip');
 
+if($DEBUG) var_dump($zipArchive);
+// die;
 if($zipArchive!==false){
   //Set Headers:
   header("Content-type: application/zip");
@@ -37,7 +41,7 @@ if($zipArchive!==false){
   readfile($zipArchive);
   exit();
 }else{
-  var_dump('ntm');
+  echo 'problem occured';
 
 }
 
