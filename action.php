@@ -2,7 +2,10 @@
 require 'myzipmaker.php';
 
 $DEBUG = false;
+
 $newNames = json_decode($_POST['names']);
+$dirPaths = json_decode($_POST['dirpaths']);
+
 
 $handle = fopen("./TAMERE.txt", "w+");
 
@@ -18,18 +21,28 @@ if($_POST["mode"]=="testing"){
   ];
 }else{
   $filesToZipLocations = $_FILES['userfiles']['tmp_name'];
+
+  // ICI OUBLIEZ LE COUNT POUR FAIRE PLANTER VOTRE PC/SERVEUR
+  // OUI PHP VA ESSAYER DE FAIRE $i<$ARRAY
+  for ($i=0; $i<count($newNames); $i++) {
+    $newNames[$i] = $dirPaths[$i].$newNames[$i];
+  }
 }
 
-if($DEBUG) var_dump(is_writable("."));
-if($DEBUG) var_dump($newNames);
-if($DEBUG) var_dump($filesToZipLocations);
-if($DEBUG) var_dump($newNames);
 
 $nomZip = 'les_cv_de_mes_petits_mmi';
 $zipArchive = create_zip($filesToZipLocations, $newNames, $nomZip.'.zip');
 
-if($DEBUG) var_dump($zipArchive);
-// die;
+
+if($DEBUG){
+  var_dump(is_writable("."));
+  var_dump($newNames);
+  var_dump($_FILES['userfiles']);
+  var_dump($filesToZipLocations);
+  var_dump($zipArchive);
+  die;
+}
+
 if($zipArchive!==false){
   //Set Headers:
   header("Content-type: application/zip");
@@ -47,6 +60,7 @@ if($zipArchive!==false){
 
 if($zipArchive!==false){
   unlink($zipArchive);
+
 }
 
 

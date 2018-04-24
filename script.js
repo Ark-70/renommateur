@@ -11,13 +11,14 @@ $(function(){
 // faire un bouton d'échange Nom/Prénom
 // this.betterDate()
 // le séparateur marche
+// Montages des profs à dl dans les tests
 //
 /*TODO*/
+// Est-ce que le unlink marche vraiment ???
 // Vraiment apply sur ce qu'il y a dans les inputs
-// Montages des profs à dl dans les tests
 /*BUG*/
 /*OPTIMIZE*/
-//
+
 
 let mesFichiersCustom = [];
 let modeIsTesting = false;
@@ -75,6 +76,9 @@ let modeIsTesting = false;
   document.querySelector('#dir_input').addEventListener("change", startFromInputs);
   function startFromInputs(){
     let files = $('#dir_input')[0].files;
+    let dirPaths = getDirectoryPathOfEachFile(files);
+    console.log("BITEBITEIBITE", dirPaths);
+    $('#dirpaths').val(JSON.stringify(dirPaths));
     // $('table').empty();
     modeIsTesting = false;
     $('#mode').val("uploaded");
@@ -160,6 +164,28 @@ let modeIsTesting = false;
     }
     console.log(allNewNames);
     $('#datanames').val(JSON.stringify(allNewNames));
+  }
+
+  function getDirectoryPathOfEachFile(files){
+    let arrDirPath = [];
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      let name = file.name;
+      let path = file.webkitRelativePath;
+
+      let indexName = path.indexOf(name);
+      let dirPath = path.slice(0,indexName);
+
+      console.log("aieaieiaieia");
+      // console.log(file);
+      // console.log(name);
+      // console.log(path);
+      // console.log(indexName);
+      console.log(dirPath);
+
+      arrDirPath.push(dirPath);
+    }
+    return arrDirPath;
   }
 
 

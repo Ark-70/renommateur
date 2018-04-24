@@ -70,7 +70,7 @@ class FichierCustom {
   cleanForbiddenWords(fileName){
     fileName = fileName.toLowerCase();
     for (let word of FichierCustom.forbiddenWords) {
-      let indexWord = fileName.search(word);
+      let indexWord = fileName.indexOf(word);
       if (indexWord!=-1) {
         console.log(fileName);
 
